@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<%- include("../../includes/head.ejs") %>
+</head>
+
+<body>
+	<%- include("../../includes/header.ejs") %>
+	<main class="container">
+		
+		<section class="jumbotron">
+			<% if(validacao.length > 0) { %>
+				<div class="alert alert-danger" role="valid form">
+					<ul>
+						<% for(var i = 0; i < validacao.length; i++) { %>
+						<li><%= validacao[i].msg %></li>
+						<% } %>
+					</ul>
+				</div>
+			<% } %>
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-ls-12">
+					<h3>Adicionar notícia</h3>
+				</div>
+				<div class="col-sm-12 col-md-12 col-ls-12">
+					<form action="/sendNews/salvar" method="post">
+						<div class="form-group">
+							<label>Título</label >
+							<input class="form-control" type="text" id="titulo" name="titulo" value="<%=noticia.titulo%>" placeholder="Título da Notícia" />
+						</div>
+						<div class="form-group">
+							<label>Resumo</label>
+							<input class="form-control" type="text" id="resumo" name="resumo" value="<%=noticia.resumo%>" placeholder="Resumo da Notícia" />
+						</div>
+						<div class="form-group">
+							<label>Data</label>
+							<input class="form-control"  type="text" id="data_noticia" name="data_noticia" value="<%=noticia.data_noticia%>" placeholder="Data da noticia" />
+						</div>
+						<div class="form-group">
+							<label>Autor</label>
+							<input class="form-control" type="text" id="autor" name="autor" value="<%=noticia.autor%>" placeholder="Título da Notícia" />
+						</div>
+						<div class="form-group">
+							<label>Notícia</label>
+							<textarea class="form-control" id="conteudo" name="conteudo" rows="5" cols="30"><%=noticia.resumo%></textarea>
+						</div>
+						<input class="btn btn-primary btn-block" type="submit" value="Enviar" />
+					</form>
+				</div>
+			</div>
+		</section>
+	</main>
+	<%- include("../../includes/footer.ejs") %>
+</body>
+</html>
