@@ -10,16 +10,18 @@
 	<main class="jumbotron">
 		<% noticia.forEach(function (el) { %>
 		<section class="container">
-			<h1><%=el.titulo %></h1>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="noticia_wrapper">
-						<span class="noticia_autor">Por <%=el.autor %></span>
-						<a href="../edit/<%=el.id%>" class="edit">Editar</a>
-						<span class="noticia_data"><%=el.data_noticia %></span>
-						<p class="noticia_resumo">
-							<%=el.conteudo %>
-						</p>
+					<div class="card border-secondary mb-4">
+						<div class="card-header">
+							<h2 class="card-title"><%=el.titulo %></h2>
+							<span class="card-subtitle"><%=el.data_noticia %></span>
+							<span class="card-subtitle">Por <strong><%=el.autor %></strong></span>
+						</div>
+						<div class="card-body">
+							<a href="../edit/<%=el.id%>" class="edit">Editar</a>
+							<p class="card-text"><%=el.conteudo %></p>
+						</div>
 					</div>
 				</div>
 			</div>
