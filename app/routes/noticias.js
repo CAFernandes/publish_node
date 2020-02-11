@@ -1,17 +1,13 @@
-const {check, validationResult } = require('express-validator')
+const { check } = require('express-validator')
+
+const PublishController = require('../controllers/publicacoes')
 
 module.exports = (application) => {
-	application.get('/noticia/:id', (req, res) => {
-		application.app.controllers.publicacoes.loadNew(application, req, res)
-	})
+	application.get('/noticia/:id', PublishController.loadNew)
 
-	application.get('/noticias', (req, res) => {
-		application.app.controllers.publicacoes.listNews(application, req, res)
-	})
+	application.get('/noticias', PublishController.loadNews)
 
-	application.get('/edit/:id', (req, res) =>{
-		application.app.controllers.publicacoes.edit(application, req, res)
-	})
+	application.get('/edit/:id', PublishController.edit)
 
 	application.post('/editNew/:id', [
 		check('titulo', 'Titulo não pode ser vazio').isLength({min: 10, max: 50}),
@@ -19,7 +15,5 @@ module.exports = (application) => {
 		check('data_noticia', 'Data informada de maneira errada').toDate({formart: 'YYYY-MM-DD'}),
 		check('autor', 'Nome de autor inválido').isLength({min: 10, max: 30}),
 		check('conteudo', 'O conteúdo precisa ter no mínimo 100 caracteres').isLength({min: 100})
-	], (req, res) => {
-		application.app.controllers.publicacoes.editNew(application, req, res, validationResult(req))
-	})
+	], PublishController.editNew)
 }

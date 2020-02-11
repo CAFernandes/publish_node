@@ -11,11 +11,11 @@
 			</section>
 			<section class="container">
 				<div class="row">
-					<% noticias.forEach(function (el) { %>
+					<% publish.forEach(function (el) { %>
 						<div class="col-md-12">
 							<div class="card border-secondary mb-4">
 								<div class="card-header">
-									<h2 class="card-title"><%=el.titulo %></h2>
+									<h2 class="card-title"><a href="./noticia/<%=el.id%>"><%=el.titulo %></a></h2>
 									<span class="card-subtitle"><%=el.data_noticia %></span>
 									<span class="card-subtitle">Por <strong><%=el.autor %></strong></span>
 								</div>

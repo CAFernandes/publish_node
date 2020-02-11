@@ -1,44 +1,55 @@
-module.exports.loadNew = (application, req, res) => {
-  let id          = req.params.id
-  let connection  = application.db.connection()
-  let NewsDao = new application.db.models.NewsDao(connection)
+const axios = require('axios')
+const { validationResult } = require('express-validator')
 
-  NewsDao.getNew(id, (error, results, fields) =>{
-    if (error) res.render('./admin/error', {error: error})
-    else res.render('./publicacao/noticia', {noticia: results})
-  })
-}
+module.exports = {
+  async loadNews (req, res) {
+    try {
+      let response = await axios.get('http://localhost:3013/api/publish')
+      res.render('./publicacao/noticias', { publish: response.data.results })
+    } catch (error) {
+      res.render('./master/error', {error: error})
+    }    
+  },
 
-module.exports.listNews = (application, req, res) => {
-  let connection  = application.db.connection()
-	let NewsDao = new application.db.models.NewsDao(connection)
+  async loadNew (req, res){
+    try {
+      let response = await axios.get(`http://localhost:3013/api/publish/${req.params.id}`)
+      res.render('./publicacao/noticia', { publish: response.data.results })
+    } catch (error) {
+      res.render('./master/error', {error: error})
+    }
+  },
+  
+  async edit (req, res) {
+    await axios({
+      method: 'get',
+      url   : `http://localhost:3013/api/publish/${req.params.id}`,
+      data  : req.body
+    })
+      .then ( response => {
+        res.render('./admin/editNew', { publish: response.data.results })
+      })
+      .catch ( error => {
+        res.render('./master/error', { error: error })
+      })
+  },
 
-	NewsDao.getNews((error, results, fields) => {
-    if (error) res.render('./admin/error', {error: error})
-    else res.render('./publicacao/noticias', {noticias: results})
-	})
-}
-
-module.exports.edit = (application, req, res) =>{
-  let id          = req.params.id
-  let connection  = application.db.connection()
-  let NewsDao = new application.db.models.NewsDao(connection)
-
-  NewsDao.getNew(id, (error, results, fields) =>{
-    if (error) res.render('./admin/error', {error: error})
-    else res.render('./admin/editNew', {publicacao: results})
-  })
-}
-
-module.exports.editNew = (application, req, res, errors) => {
-  if(!errors.isEmpty()){
-    res.redirect(`../edit/${req.params.id}`)
-    return
+  async editNew (req, res){
+    let errors = validationResult(req)
+    if(!errors.isEmpty()){
+      res.redirect(`../edit/${req.params.id}`)
+      return
+    }
+    await axios({
+      method: 'put',
+      url   : `http://localhost:3013/api/publish/${req.params.id}`,
+      data  : req.body
+    })
+      .then ( response => {
+        res.render('./publicacao/noticias', { publish: response.data.results })
+      })
+      .catch ( error => {
+        res.render('./master/error', { error: error })
+      })
   }
-  let connection = application.db.connection()
-  let NewsDao = new application.db.models.NewsDao(connection)
-  NewsDao.updateNews(req.body, req.params.id, (error, results, fields) => {
-    if (error) {console.log(error); res.render('./master/error', {error: error})}
-    else application.app.controllers.publicacoes.loadNew(application, req, res)
-  })
 }
