@@ -12,40 +12,40 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="noticia_wrapper">
-						<span class="noticia_autor">Por <%= noticias[0].autor %></span>
-						<a href="./noticia/<%= noticias[0].id %>" class="noticia_titulo"><%= noticias[0].titulo %></a>
-						<span class="noticia_data"><%= noticias[0].data_noticia %></span>
+						<span class="noticia_autor">Por <%= publish[0].autor %></span>
+						<a href="./noticia/<%= publish[0].id %>" class="noticia_titulo"><%= publish[0].titulo %></a>
+						<span class="noticia_data"><%= publish[0].data_noticia %></span>
 						<br />
 						<p class="noticia_resumo">
-							<%= noticias[0].resumo %>
+							<%= publish[0].resumo %>
 						</p>
 					</div>
 				</div>
 
 				<div class="col-md-4">
 					<div class="noticia_wrapper">
-						<span class="noticia_autor">Por <%= noticias[1].autor %></span>
-						<a href="./noticia/<%= noticias[0].id %>" class="noticia_titulo"><%= noticias[1].titulo %></a>
-						<span class="noticia_data"><%= noticias[1].data_noticia %></span>
+						<span class="noticia_autor">Por <%= publish[1].autor %></span>
+						<a href="./noticia/<%= publish[0].id %>" class="noticia_titulo"><%= publish[1].titulo %></a>
+						<span class="noticia_data"><%= publish[1].data_noticia %></span>
 
 						<br />
 						<p class="noticia_resumo">
-							<%= noticias[1].resumo %>
+							<%= publish[1].resumo %>
 						</p>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
-				<% for(var i = 2; i < noticias.length; i++){ %>
+				<% for(var i = 2; i < publish.length; i++){ %>
 				<div class="col-md-4">
 					<div class="noticia_wrapper">
-						<span class="noticia_autor">Por <%= noticias[i].autor %></span>
-						<a href="./noticia/<%= noticias[0].id %>" class="noticia_titulo"><%= noticias[i].titulo %></a>
-						<span class="noticia_data"><%= noticias[i].data_noticia %></span>
+						<span class="noticia_autor">Por <%= publish[i].autor %></span>
+						<a href="./noticia/<%= publish[0].id %>" class="noticia_titulo"><%= publish[i].titulo %></a>
+						<span class="noticia_data"><%= publish[i].data_noticia %></span>
 						<br />
 						<p class="noticia_resumo">
-							<%= noticias[i].resumo %>
+							<%= publish[i].resumo %>
 						</p>
 					</div>
 				</div>

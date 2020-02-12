@@ -10,8 +10,17 @@
 				<h1>Publicação</h1>
 			</section>
 			<section class="container">
+				<% if(typeof error == undefined){ %>
+					<div class="alert alert-danger" role="valid form">
+						<ul>
+							<% for(var i = 0; i < error.length; i++) { %>
+							<li><%= error[i].msg %></li>
+							<% } %>
+						</ul>
+					</div>
+				<% } %>
 				<% publish.forEach(function (el) { %>
-					<form action="../editNew/<%= el.id %>" method="post">
+					<form action="../edit/<%= el.id %>" method="post">
 						<div class="form-group">
 							<label for="titulo">Titulo</label>
 							<input class="form-control" type="text" name="titulo" id="titulo" value="<%= el.titulo %>">

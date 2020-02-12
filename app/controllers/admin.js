@@ -1,17 +1,22 @@
-module.exports.renderForm = (application, req, res) => {
-  res.render('./admin/sendNew', {validacao: {}, noticia: {}})
-}
-module.exports.saveNews = (application, req, res, errors) => {
-  if(!errors.isEmpty()){
-    res.render('./admin/sendNew', {validacao: errors.errors, noticia: req.body})
-    return
-  }
-    
-  let connection  = application.db.connection()
-  let NewsDao = new application.db.models.NewsDao(connection);
+const { validationResult } = require('express-validator')
+const axios = require('axios')
 
-  NewsDao.insertNew(req.body, function(error, results, fields){
-    if (error) res.render('./master/error', {error: error})
-    else res.redirect('./publicacao/noticias')
-  })
+module.exports = {
+  async saveNews (req, res) {
+    await axios({
+      url   : 'http://localhost:3013/api/publish/',
+      method: 'post',
+      data  : req.body
+    })
+      .then ( response => {
+        res.render('./publicacao/noticias')
+      })
+      .catch ( error => {
+        res.render('./master/error', { error: error })
+      })
+  },
+
+  async renderForm (req, res) {
+    await res.render('./admin/sendNew', {validacao: {}, noticia: {}})
+  }
 }

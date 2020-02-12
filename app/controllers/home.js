@@ -1,12 +1,12 @@
-module.exports.index = (application, req, res) =>{
-  let conn        = application.db.connection()
-  let NewsDao = new application.db.models.NewsDao(conn);
+const axios = require('axios')
 
-  NewsDao.getLastNews((error, response)=>{
-    if(error) {
-      res.render('./master/error', {error: error})
-      return
+module.exports = {
+  async index ( req, res ) {
+    try{
+      let response = await axios.get(`http://localhost:3013/api/publish/index`)
+      res.render('./master/index', { publish: response.data.results })
+    } catch ( error ) {
+      res.render('./master/error', { error: error })
     }
-    res.render('./master/index', {noticias: response})
-  })
+  }
 }
