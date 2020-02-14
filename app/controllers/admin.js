@@ -9,7 +9,12 @@ module.exports = {
       data  : req.body
     })
       .then ( response => {
-        res.render('./publicacao/noticias')
+        if(response.status)
+        {
+          res.redirect('../publications')
+        } else {
+          res.render('./master/error', { error: error })
+        }
       })
       .catch ( error => {
         res.render('./master/error', { error: error })

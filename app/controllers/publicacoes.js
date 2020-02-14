@@ -6,7 +6,7 @@ module.exports = {
   async loadNews (req, res) {
     try {
       let response = await axios.get('http://localhost:3013/api/publish')
-      res.render('./publicacao/noticias', { publish: response.data.results })
+      res.render('./publicacao/publications', { publish: response.data.results })
     } catch (error) {
       res.render('./master/error', {error: error})
     }    
@@ -15,7 +15,7 @@ module.exports = {
   async loadNew (req, res){
     try {
       let response = await axios.get(`http://localhost:3013/api/publish/${req.params.id}`)
-      res.render('./publicacao/noticia', { publish: response.data.results })
+      res.render('./publicacao/publish', { publish: response.data.results })
     } catch (error) {
       res.render('./master/error', {error: error})
     }
@@ -35,14 +35,18 @@ module.exports = {
   },
 
   async update (req, res){
-    console.log('eu estou aquiiiiiiii')
     await axios({
       method: 'put',
       url   : `http://localhost:3013/api/publish/${req.params.id}`,
       data  : req.body
     })
       .then ( response => {
-        res.render('./publicacao/noticias')
+        if(response.status)
+        {
+          res.redirect(`../publish/${req.params.id}`)
+        } else {
+          res.render('../views/pages/master/error.ejs')
+        }
       })
       .catch ( error => {
         res.render('./master/error', { error: error })

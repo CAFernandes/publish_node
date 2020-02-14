@@ -13,8 +13,6 @@ app.use(body.urlencoded({extended: true}))
 consign()
   .include('./app/controllers')
   .then('./app/routes')
-  .then('./db/connection.js')
-  .then('./db/models')
   .into(app)
 
 module.exports = app

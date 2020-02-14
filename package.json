@@ -1,29 +1,28 @@
 {
-  "name": "noticias",
+  "name": "publish_node",
   "version": "1.0.0",
-  "description": "Estudo desenvolvimento em node para um site de noticias",
+  "description": "Estudo desenvolvimento em node para um site de publicações",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CaioAFernandes/noticias_node.git"
+    "url": "git+https://github.com/CaioAFernandes/publish_node.git"
   },
   "author": "Caio Alberto Fernandes",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CaioAFernandes/noticias_node/issues"
+    "url": "https://github.com/CaioAFernandes/publish_node/issues"
   },
-  "homepage": "https://github.com/CaioAFernandes/noticias_node#readme",
+  "homepage": "https://github.com/CaioAFernandes/publish_node#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "consign": "^0.1.6",
     "ejs": "^2.7.4",
     "express": "^4.17.1",
-    "express-validator": "^6.4.0",
-    "mysql": "^2.18.1"
+    "express-validator": "^6.4.0"
   }
 }
