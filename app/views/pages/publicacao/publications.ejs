@@ -10,10 +10,10 @@
 				<h1>Publicações</h1>
 			</section>
 			<section class="container">
-				<div class="row">
+				<div class="d-flex align-content-stretch flex-wrap">
 					<% publish.forEach(function (el) { %>
-						<div class="col-md-12">
-							<div class="card border-secondary mb-4">
+						<div class="p-2 flex-fill">
+							<div class="card border-secondary">
 								<div class="card-header">
 									<h2 class="card-title"><a href="./publish/<%=el.id%>"><%=el.titulo %></a></h2>
 									<span class="card-subtitle"><%=el.data_noticia %></span>
